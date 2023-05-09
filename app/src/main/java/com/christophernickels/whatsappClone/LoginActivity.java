@@ -11,9 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
-public class loginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
 //    Widgets
     EditText username, password;
@@ -23,6 +24,20 @@ public class loginActivity extends AppCompatActivity {
 //    Firebase
     FirebaseAuth auth;
     DatabaseReference db;
+    FirebaseUser firebaseUser;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+//        Check if user exists
+        if (firebaseUser != null){
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +52,12 @@ public class loginActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
+
 //        Adding event listener for the register link
         txtRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(loginActivity.this, RegisterActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
 
@@ -53,7 +69,7 @@ public class loginActivity extends AppCompatActivity {
                 String txtPassword = password.getText().toString();
 
                 if (txtUsername.isEmpty() || txtPassword.isEmpty()){
-                    Toast.makeText(loginActivity.this, "Please fill out all fields...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Please fill out all fields...", Toast.LENGTH_SHORT).show();
                 } else {
                     loginNow(txtUsername, txtPassword);
                 }
@@ -63,15 +79,15 @@ public class loginActivity extends AppCompatActivity {
 
 
     private void loginNow(String username, String password) {
-        auth.signInWithEmailAndPassword(username, password).addOnCompleteListener(loginActivity.this, task -> {
+        auth.signInWithEmailAndPassword(username, password).addOnCompleteListener(LoginActivity.this, task -> {
             if (task.isSuccessful()){
                 //                Opening the Main activity
-                Intent intent = new Intent(loginActivity.this, MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
             } else {
-                Toast.makeText(loginActivity.this, "Login failed...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Login failed...", Toast.LENGTH_SHORT).show();
             }
         });
     }

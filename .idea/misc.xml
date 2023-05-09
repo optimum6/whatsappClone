@@ -4,7 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/space/AndroidStudioProjects/whatsappClone/app/src/main/res/layout/activity_login.xml" value="0.33425925925925926" />
+        <entry key="..\:/Users/space/AndroidStudioProjects/whatsappClone/app/src/main/res/layout/activity_main.xml" value="0.33425925925925926" />
         <entry key="..\:/Users/space/AndroidStudioProjects/whatsappClone/app/src/main/res/layout/activity_register.xml" value="0.33425925925925926" />
+        <entry key="..\:/Users/space/AndroidStudioProjects/whatsappClone/app/src/main/res/layout/fragment_chats.xml" value="0.33425925925925926" />
+        <entry key="..\:/Users/space/AndroidStudioProjects/whatsappClone/app/src/main/res/layout/fragment_users.xml" value="0.33425925925925926" />
+        <entry key="..\:/Users/space/AndroidStudioProjects/whatsappClone/app/src/main/res/menu/menu.xml" value="0.33425925925925926" />
       </map>
     </option>
   </component>
